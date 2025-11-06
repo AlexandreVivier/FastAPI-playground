@@ -24,7 +24,7 @@ def create_item(item: Item):
 #  maintenant, avec BaseModel et JSON:
 #  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"text": "apple", "is_done": false}'
 
-@app.get("/items")
+@app.get("/items", response_model=list[Item])
 def list_items(limit: int = 10):
     return items[0:limit]
 
@@ -32,7 +32,7 @@ def list_items(limit: int = 10):
 #  Ou bien avec limite:
 #  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items?limit=3" -Method GET -Headers @{"Content-Type"="application/json"}
 
-@app.get("/items/{item_id}")
+@app.get("/items/{item_id}", response_model=Item)
 def get_item(item_id: int) -> Item:
     if item_id < len(items):
         return items[item_id]
