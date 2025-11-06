@@ -52,3 +52,8 @@ def get_item(item_id: int) -> Item:
     # http://127.0.0.1:8000/redoc
     # JSON file
     # http://127.0.0.1:8000/openapi.json
+
+    #  Avantages de FastAPI VS Flask:
+    #  V Async par défaut 
+    #  V Plus facile à utiliser
+    #  X Moins de supports externes
