@@ -40,3 +40,13 @@ def get_item(item_id: int) -> Item:
         raise HTTPException(status_code=404, detail=f"Item {item_id} not found")
     
     # Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/3" -Method GET -Headers @{"Content-Type"="application/json"}
+
+# DOCS:
+    # Pour lancer le serveur:
+    # uvicorn main:app --reload
+    # Puis aller à l'adresse:
+    # http://127.0.0.1:8000
+    # Pour avoir le modèle de réponse dans la documentation interactive:
+    # http://127.0.0.1:8000/docs
+    # Ou en mode texte:
+    # http://127.0.0.1:8000/redoc
