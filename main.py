@@ -16,12 +16,13 @@ def root():
     return {"Foo": "Bar"}
 
 @app.post("/items/")
-def create_item(item: str):
+def create_item(item: Item):
     items.append(item)
     return items
-
+# Avant l'arrivée de BaseModel et la création de la classe Item:
 #  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/?item=apple" -Method POST -Headers @{"Content-Type"="application/json"}
-
+#  maintenant, avec BaseModel et JSON:
+#  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"text": "apple", "is_done": false}'
 
 @app.get("/items")
 def list_items(limit: int = 10):
@@ -32,7 +33,7 @@ def list_items(limit: int = 10):
 #  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items?limit=3" -Method GET -Headers @{"Content-Type"="application/json"}
 
 @app.get("/items/{item_id}")
-def get_item(item_id: int) -> str:
+def get_item(item_id: int) -> Item:
     if item_id < len(items):
         return items[item_id]
     else:
