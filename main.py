@@ -16,7 +16,7 @@ def create_item(item: str):
 
 @app.get("/items/{item_id}")
 def get_item(item_id: int) -> str:
-    try:
+    if item_id < len(items):
         return items[item_id]
-    except IndexError:
+    else:
         raise HTTPException(status_code=404, detail="Item not found")
