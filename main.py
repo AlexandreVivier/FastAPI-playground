@@ -1,6 +1,12 @@
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI()
+
+
+class Item(BaseModel):
+    text: str = None
+    is_done: bool = False
 
 
 items = []
@@ -14,9 +20,16 @@ def create_item(item: str):
     items.append(item)
     return items
 
+#  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/?item=apple" -Method POST -Headers @{"Content-Type"="application/json"}
+
+
 @app.get("/items")
 def list_items(limit: int = 10):
     return items[0:limit]
+
+#  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items" -Method GET -Headers @{"Content-Type"="application/json"}
+#  Ou bien avec limite:
+#  Invoke-WebRequest -Uri "http://127.0.0.1:8000/items?limit=3" -Method GET -Headers @{"Content-Type"="application/json"}
 
 @app.get("/items/{item_id}")
 def get_item(item_id: int) -> str:
@@ -24,3 +37,5 @@ def get_item(item_id: int) -> str:
         return items[item_id]
     else:
         raise HTTPException(status_code=404, detail=f"Item {item_id} not found")
+    
+    # Invoke-WebRequest -Uri "http://127.0.0.1:8000/items/3" -Method GET -Headers @{"Content-Type"="application/json"}
