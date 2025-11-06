@@ -50,3 +50,5 @@ def get_item(item_id: int) -> Item:
     # http://127.0.0.1:8000/docs
     # Ou en mode texte:
     # http://127.0.0.1:8000/redoc
+    # JSON file
+    # http://127.0.0.1:8000/openapi.json
